@@ -1,1 +1,36 @@
-<app-card *ngFor="let card of drawnCards" [card]="card"></app-card>
+<div class="playField">
+  <div class="dealerCards">
+    <app-card
+      *ngFor="let card of dealerCards; let i = index"
+      [card]="card"
+      [hidden]="i === 1"
+      [gameOver]="gameOver"
+      [ngClass]="{ hiddenCard: i === 1 }"
+      [class]="cardClasses[i]"
+    ></app-card>
+  </div>
+  <div class="drawnCards">
+    <app-card
+      *ngFor="let card of drawnCards; let i = index"
+      [card]="card"
+      [class]="cardClasses[i]"
+    ></app-card>
+  </div>
+  <div class="actions">
+    @if (this.bust) {
+    <p class="bust">Bust!</p>
+    } @if (!this.gameOver) {
+    <button (click)="hitMe()" type="button" class="hitMe">Hit Me!</button>
+    <button (click)="stand()" type="button" class="stand">Stand</button>
+    } @if (this.gameOver) {
+    <button (click)="deal()" type="button" class="resetGame">Deal</button>
+    }
+  </div>
+  <div class="results">
+    @if (this.win) {
+    <p class="win">You win!</p>
+    } @if (!this.win && this.gameOver) {
+    <p class="lose">You lose!</p>
+    }
+  </div>
+</div>

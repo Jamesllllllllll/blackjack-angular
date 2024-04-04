@@ -99,6 +99,7 @@ export class GameService {
     } else {
       console.log('You lose!')
     }
+    
     this.gameOver = true;
   }
 

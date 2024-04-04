@@ -15,12 +15,16 @@ body {
 
 .content {
   min-height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 .table {
   display: grid;
   place-items: center;
-  min-height: 100vh;
+  flex-grow: 1;
+  height: 100%;
+  padding: 50px;
   background-image: 
   radial-gradient(
     farthest-corner circle at 50% 40%,

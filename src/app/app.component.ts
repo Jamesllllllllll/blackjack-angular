@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Card } from './card/card.component';
 import { Table } from './table/table.component';
-import { GameService } from './game.service';
 
 @Component({
   selector: 'app-root',

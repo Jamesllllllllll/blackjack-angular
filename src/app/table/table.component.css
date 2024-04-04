@@ -2,14 +2,35 @@
   display: flex;
   flex-flow: column nowrap;
   gap: 50px;
+  width: 100%;
 }
 .dealerCards {
   display: flex;
+  justify-content: center;
+  position:relative;
+  width: 100%;
   gap: 20px;
+}
+
+.hiddenCard {
+  background-image: url("/assets/playing-card-back.png");
+  background-repeat: no-repeat;
+  background-size: cover ;
+  border-radius: 15px;
+  width: 144px;
+}
+
+.hiddenCard > canvas {
+  visibility: hidden;
+  width: 500px;
+  color: red;
+  background-color: red;
 }
 
 .drawnCards {
   display: flex;
+  justify-content: center;
+  width: 100%;
   gap: 20px;
 }
 
@@ -34,4 +55,45 @@
   border-radius: 10px;
   font-weight: 500;
   border: none;
+}
+
+.win {
+  color: hsl(110, 73%, 90%);
+  background-color: hsl(110, 92%, 37%);
+  padding: 5px 20px;
+  border-radius: 10px;
+  font-weight: 500;
+  border: none;
+}
+
+.lose {
+  color: hsl(0, 71%, 90%);
+  background-color: hsl(0, 92%, 37%);
+  padding: 5px 20px;
+  border-radius: 10px;
+  font-weight: 500;
+  border: none;
+}
+
+.zIndex-0 {
+  z-index: 0;
+  transform: rotate(-5deg)
+}
+
+.zIndex-1 {
+  z-index: 1;
+  position: relative;
+  left: -50px;
+  transform: rotate(-2deg)
+}
+
+.zIndex-2 {
+  z-index: 2;
+  position: relative;
+  left: -100px;
+  
+}
+
+.zIndex-3 {
+  z-index: 3;
 }

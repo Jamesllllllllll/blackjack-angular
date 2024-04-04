@@ -6,31 +6,8 @@ import { Card } from '../card/card.component';
 @Component({
   selector: 'app-table',
   standalone: true,
-  template: `
-    <div class="playField">
-      <div class="dealerCards">
-        <app-card *ngFor="let card of dealerCards" [card]="card"></app-card>
-      </div>
-      <div class="drawnCards">
-        <app-card *ngFor="let card of drawnCards" [card]="card"></app-card>
-      </div>
-      <div class="actions">
-        @if (this.bust) {
-        <p class="bust">Bust!</p>
-        } @if (!this.gameOver) {
-        <button (click)="hitMe()" type="button" class="hitMe">Hit Me!</button>
-        <button (click)="stand()" type="button" class="stand">Stand</button>
-        } @if (this.gameOver) {
-        <button (click)="deal()" type="button" class="resetGame">Deal</button>
-        } @if (this.win) {
-        <p>You win!</p>
-        } @if (!this.win && this.gameOver) {
-        <p>You lose!</p>
-        }
-      </div>
-    </div>
-  `,
-  styleUrls: ['./table.component.css'],
+  templateUrl: './table.component.html',
+  styleUrl: './table.component.css',
   imports: [CommonModule, Card],
 })
 export class Table {
@@ -38,25 +15,34 @@ export class Table {
   dealerCards = this.gameService.dealerCards;
   bust = this.gameService.bust;
   gameOver = this.gameService.gameOver;
-  win = false;
+  win = this.gameService.win;
+  cardClasses: string[] = [];
+  drawnClasses: string[] = [];
 
   constructor(private gameService: GameService) {
     this.drawnCards = this.gameService.drawnCards;
     this.dealerCards = this.gameService.dealerCards;
     this.win = this.gameService.win;
-    console.log(this.gameService.drawnCards);
+    for (let i = 0; i < this.dealerCards.length; i++) {
+      this.cardClasses.push('zIndex-' + i);
+    }
+    for (let i = 0; i < this.drawnCards.length; i++) {
+      this.drawnClasses.push('zIndex-' + i);
+    }
   }
 
   hitMe() {
     this.gameService.hitMe();
     this.bust = this.gameService.bust;
     this.gameOver = this.gameService.gameOver;
+    this.cardClasses.push('zIndex-' + this.cardClasses.length)
   }
 
   stand() {
     this.gameService.stand();
-    this.gameOver = this.gameService.gameOver;
     this.win = this.gameService.win;
+    this.gameOver = this.gameService.gameOver;
+    console.log('table game over:', this.gameOver)
   }
 
   deal() {
