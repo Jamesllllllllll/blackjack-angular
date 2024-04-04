@@ -21,16 +21,17 @@
   @if (this.bust) {
   <p class="bust">Bust!</p>
   } @if (!this.gameOver) {
-  <button (click)="hitMe()" type="button" class="hitMe">Hit Me!</button>
+  <button (click)="hitMe()" type="button" class="hitMe">Hit</button>
   <button (click)="stand()" type="button" class="stand">Stand</button>
   } @if (this.gameOver) {
   <button (click)="deal()" type="button" class="resetGame">Deal</button>
   }
 </div>
+<!-- TODO: Add Angular transition animations to gameOver messages -->
 <div class="results">
   @if (this.win) {
-  <p class="win">You win!</p>
+  <p class="gameOver win">You win!</p>
   } @if (!this.win && this.gameOver) {
-  <p class="lose">You lose!</p>
+  <p class="gameOver lose">You lose!</p>
   }
 </div>
