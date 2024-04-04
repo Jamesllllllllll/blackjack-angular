@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SingleCard } from './singleCard';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -57,7 +58,6 @@ export class GameService {
   }
 
   drawCards(): SingleCard[] {
-    // TODO: Implement logic for selecting an available card in the deck
     if (this.deck.length < 2) {
       throw new Error('Not enough cards in the deck');
     }
@@ -69,7 +69,6 @@ export class GameService {
       const drawnCard = this.deck.splice(randomIndex, 1)[0];
       cards.push(drawnCard);
     }
-    console.log(`remaining cards in the deck: ${this.deck.length}`);
     return cards;
   }
 
@@ -90,23 +89,44 @@ export class GameService {
     return drawnCard;
   }
 
+  dealerHit() {
+    if (this.deck.length < 1) {
+      throw new Error('Not enough cards in the deck');
+    }
+
+    const drawnCard = this.drawCardFromDeck();
+    this.dealerCards.push(drawnCard);
+  }
+
   stand(): void {
     const playerHandValue = this.calculateHandValue(this.drawnCards);
-    const dealerHandValue = this.calculateHandValue(this.dealerCards)
-    if (playerHandValue > dealerHandValue) {
-      console.log('You win!')
+    let dealerHandValue = this.calculateHandValue(this.dealerCards);
+    if (dealerHandValue < 17) {
+      this.dealerHit();
+      dealerHandValue = this.calculateHandValue(this.dealerCards)
+    } else {
+      console.log('dealer stands');
+    }
+    if (playerHandValue > dealerHandValue || dealerHandValue > 21) {
+      console.log('Win - dealer hand value:', dealerHandValue)
+      console.log('You win!');
       this.win = true;
     } else {
-      console.log('You lose!')
+      console.log('Lose - dealer hand value:', dealerHandValue)
+      console.log('You lose!');
     }
-    
+    console.log('Your hand value: ', playerHandValue)
     this.gameOver = true;
   }
 
   deal(): void {
     console.log('dealing...');
+    // TODO: Currently, each hand is dealt from a fresh deck.
+    // In the future, this needs to be refactored if the deck state
+    // needs to persist over multiple hands/rounds
     this.deck = this.buildDeck();
     this.drawnCards = this.drawCards();
+    this.dealerCards = this.drawCards();
     this.bust = false;
     this.gameOver = false;
     this.win = false;
@@ -121,6 +141,7 @@ export class GameService {
 
   private calculateHandValue(hand: SingleCard[]): number {
     // This doesn't account for aces being 1 or 11
+    // ... all face cards including aces are worth 10.
     // const handValue = this.drawnCards.reduce((acc, cur) => {
     //   const rankValue = isNaN(parseInt(cur.rank)) ? 10 : parseInt(cur.rank);
     //   return acc + rankValue;
@@ -131,25 +152,24 @@ export class GameService {
 
     for (let i = 0; i < hand.length; i++) {
       let currentCard = hand[i].rank;
-      console.log(currentCard)
       if (currentCard === 'A') {
-        aces++
+        aces++;
       } else {
-        handValue += isNaN(parseInt(hand[i].rank)) ? 10 : parseInt(hand[i].rank)
-        console.log('hand value updated to:', handValue)
+        handValue += isNaN(parseInt(hand[i].rank))
+          ? 10
+          : parseInt(hand[i].rank);
       }
     }
 
     // iterate through aces
     for (let j = aces; j > 0; j--) {
-      if (handValue > (11-j)) {
+      if (handValue > 11 - j) {
         handValue += 1;
       } else {
         handValue += 11;
       }
     }
 
-    console.log(`${JSON.stringify(hand)} handValue: ${handValue}`);
     return handValue;
   }
 }

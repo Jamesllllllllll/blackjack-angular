@@ -48,6 +48,7 @@ export class Table {
   deal() {
     this.gameService.deal();
     this.drawnCards = this.gameService.drawnCards;
+    this.dealerCards = this.gameService.dealerCards;
     this.bust = this.gameService.bust;
     this.gameOver = this.gameService.gameOver;
     this.win = this.gameService.win;
