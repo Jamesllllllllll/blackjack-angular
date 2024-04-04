@@ -7,10 +7,14 @@ export class GameService {
   deck: SingleCard[] = [];
   bust: boolean = false;
   drawnCards: SingleCard[] = [];
+  dealerCards: SingleCard[] = [];
+  gameOver: boolean = false;
+  win: boolean = false;
 
   constructor() {
     this.deck = this.buildDeck();
     this.drawnCards = this.drawCards();
+    this.dealerCards = this.drawCards();
   }
 
   buildDeck(): SingleCard[] {
@@ -77,12 +81,25 @@ export class GameService {
     const drawnCard = this.drawCardFromDeck();
     this.drawnCards.push(drawnCard);
     // check if hand is a bust
-    const handValue = this.calculateHandValue();
+    const handValue = this.calculateHandValue(this.drawnCards);
     if (handValue > 21) {
       console.log('bust!');
       this.bust = true;
+      this.gameOver = true;
     }
     return drawnCard;
+  }
+
+  stand(): void {
+    const playerHandValue = this.calculateHandValue(this.drawnCards);
+    const dealerHandValue = this.calculateHandValue(this.dealerCards)
+    if (playerHandValue > dealerHandValue) {
+      console.log('You win!')
+      this.win = true;
+    } else {
+      console.log('You lose!')
+    }
+    this.gameOver = true;
   }
 
   deal(): void {
@@ -90,6 +107,8 @@ export class GameService {
     this.deck = this.buildDeck();
     this.drawnCards = this.drawCards();
     this.bust = false;
+    this.gameOver = false;
+    this.win = false;
   }
 
   private drawCardFromDeck(): SingleCard {
@@ -99,21 +118,24 @@ export class GameService {
     return drawnCard;
   }
 
-  private calculateHandValue(): number {
+  private calculateHandValue(hand: SingleCard[]): number {
     // This doesn't account for aces being 1 or 11
     // const handValue = this.drawnCards.reduce((acc, cur) => {
     //   const rankValue = isNaN(parseInt(cur.rank)) ? 10 : parseInt(cur.rank);
     //   return acc + rankValue;
     // }, 0);
+
     let handValue = 0;
     let aces = 0;
 
-    for (let i = 0; i < this.drawnCards.length; i++) {
-      let currentCard = this.drawnCards[i].rank;
+    for (let i = 0; i < hand.length; i++) {
+      let currentCard = hand[i].rank;
+      console.log(currentCard)
       if (currentCard === 'A') {
         aces++
       } else {
-        handValue += isNaN(parseInt(this.drawnCards[i].rank)) ? 10 : parseInt(this.drawnCards[i].rank)
+        handValue += isNaN(parseInt(hand[i].rank)) ? 10 : parseInt(hand[i].rank)
+        console.log('hand value updated to:', handValue)
       }
     }
 
@@ -126,7 +148,7 @@ export class GameService {
       }
     }
 
-    console.log(`handValue: ${handValue}`);
+    console.log(`${JSON.stringify(hand)} handValue: ${handValue}`);
     return handValue;
   }
 }
