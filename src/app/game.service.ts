@@ -101,11 +101,9 @@ export class GameService {
   stand(): void {
     const playerHandValue = this.calculateHandValue(this.drawnCards);
     let dealerHandValue = this.calculateHandValue(this.dealerCards);
-    if (dealerHandValue < 17) {
+    while (dealerHandValue < 17) {
       this.dealerHit();
       dealerHandValue = this.calculateHandValue(this.dealerCards)
-    } else {
-      console.log('dealer stands');
     }
     if (playerHandValue > dealerHandValue || dealerHandValue > 21) {
       console.log('Win - dealer hand value:', dealerHandValue)

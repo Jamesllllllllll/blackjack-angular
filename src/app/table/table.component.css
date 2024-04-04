@@ -67,6 +67,7 @@ button {
   letter-spacing: 0.5px;
   height: 80px;
   width: 80px;
+  transition: all 0.2s ease-in-out;
 }
 button.stand {
   background-color: rgb(205, 4, 4);
