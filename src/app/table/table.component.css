@@ -43,7 +43,7 @@
 }
 
 .actions button {
-  padding: 5px 20px;
+  padding: 8px 25px;
   border-radius: 10px;
   border: none;
 }
@@ -57,10 +57,18 @@
   border: none;
 }
 
+.results {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
 .win {
-  color: hsl(110, 73%, 90%);
+  color: hsl(110, 73%, 8%);
+  position: absolute;
+  top: 0px;
   background-color: hsl(110, 92%, 37%);
-  padding: 5px 20px;
+  padding: 8px 25px;
   border-radius: 10px;
   font-weight: 500;
   border: none;
@@ -68,8 +76,10 @@
 
 .lose {
   color: hsl(0, 71%, 90%);
+  position: absolute;
+  top: 0px;
   background-color: hsl(0, 92%, 37%);
-  padding: 5px 20px;
+  padding: 8px 25px;
   border-radius: 10px;
   font-weight: 500;
   border: none;
