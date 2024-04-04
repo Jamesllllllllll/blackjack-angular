@@ -13,6 +13,12 @@ body {
 
 .main {
   min-height: 100vh;
+  background-image: 
+  radial-gradient(
+    farthest-corner circle at 50% 40%,
+    #4bad2b 0%, #095d16 80%
+  )
+;
 }
 
 .content {
@@ -27,10 +33,11 @@ body {
   flex-grow: 1;
   height: 100%;
   padding: 50px;
-  background-image: 
-  radial-gradient(
-    farthest-corner circle at 50% 40%,
-    #76b063 0%, #15371a 80%
-  )
-;
+  background-image: url('/assets/felt.png')
+}
+
+@media (max-width: 800px) {
+  .table {
+    padding: 0
+  }
 }
