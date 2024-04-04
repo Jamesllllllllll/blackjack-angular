@@ -1,4 +1,12 @@
-# BlackjackGame
+# Blackjack
+
+This is a simple Blackjack game I created to learn [Angular](https://angular.dev).
+
+In its current state, you can hit to draw cards. The game will detect if you bust. When you stand, the dealer's cards will be revealed to see who wins! 
+
+TO DO: Dealer decides whether to hit when player stands.
+
+---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
 
