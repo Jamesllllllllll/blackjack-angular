@@ -1,0 +1,18 @@
+.drawnCards {
+  display: flex;
+  gap: 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.actions button {
+  padding: 5px 20px;
+  border-radius: 10px;
+  border: none;
+}
