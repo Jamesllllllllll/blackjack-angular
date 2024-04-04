@@ -6,6 +6,8 @@ In its current state, you can hit to draw cards. The game will detect if you bus
 
 TO DO: Dealer decides whether to hit when player stands.
 
+![blackjack-angular](https://github.com/Jamesllllllllll/blackjack-angular/assets/125431058/077096d0-377a-44e6-b918-818716ec6ee9)
+
 ---
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
