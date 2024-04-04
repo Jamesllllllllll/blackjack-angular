@@ -54,28 +54,41 @@
 }
 
 button {
-  background: #108FE8;
+  background: #108fe8;
   border: 3px solid #fff;
   border-radius: 100%;
-  box-shadow: 0 -2px 0 3px #0d72b8 inset, 0 5px 5px rgba(3, 25, 41, 0.17), 0 15px rgba(255, 255, 255, 0.25) inset;
+  box-shadow: 0 -2px 0 3px #0d72b8 inset, 0 5px 5px rgba(3, 25, 41, 0.17),
+    0 15px rgba(255, 255, 255, 0.25) inset;
   cursor: pointer;
   display: grid;
-  place-items:center;
+  place-items: center;
   color: #fff;
+  font-size: 17px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  padding-bottom: 2px;
+  padding-left: 1px;
   height: 80px;
   width: 80px;
   transition: all 0.2s ease-in-out;
 }
 button.stand {
   background-color: rgb(205, 4, 4);
-  box-shadow: 0 -2px 0 3px #760000 inset, 0 5px 5px rgba(3, 25, 41, 0.17), 0 15px rgba(255, 255, 255, 0.25) inset;
+  box-shadow: 0 -2px 0 3px #760000 inset, 0 5px 5px rgba(3, 25, 41, 0.17),
+    0 15px rgba(255, 255, 255, 0.25) inset;
 }
 button:hover {
   background: #333;
-  box-shadow: 0 -2px 0 3px #1a1a1a inset, 0 5px 5px rgba(0, 0, 0, 0.17), 0 15px rgba(255, 255, 255, 0.32) inset;
+  box-shadow: 0 -2px 0 3px #1a1a1a inset, 0 5px 5px rgba(0, 0, 0, 0.17),
+    0 15px rgba(255, 255, 255, 0.32) inset;
+}
+button:disabled {
+  color: rgb(53, 53, 53);
+  background-color: hsl(0, 0%, 41%);
+  box-shadow: 0 -2px 0 3px #1a1a1a inset, 0 5px 5px rgba(0, 0, 0, 0.17),
+    0 15px rgba(255, 255, 255, 0.32) inset;
+  cursor: pointer;
 }
 
 .bust {
@@ -93,16 +106,28 @@ button:hover {
   margin-top: 30px;
 }
 
+@keyframes gameOver {
+  from {
+    opacity: 0.5;
+    transform: scale(50%) rotate(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(100%) rotate(-15deg);
+  }
+}
+
 .gameOver {
   position: absolute;
-  top:-400px;
-  font-family: 'Mr Dafoe', cursive;
+  top: -475px;
+  font-family: "Mr Dafoe", cursive;
   font-size: 130px;
-  transform:rotate(-15deg);
-  -webkit-transform:rotate(-15deg); 
+  transform: rotate(-15deg);
+  -webkit-transform: rotate(-15deg);
   z-index: 100;
   width: 100vw;
   text-align: center;
+  animation: gameOver 0.3s;
 }
 
 .win {
@@ -115,51 +140,75 @@ button:hover {
   text-shadow: 1px 2px 0px hsl(0, 84%, 83%), 0px 0px 10px #222;
 }
 
+@keyframes deal {
+  from {
+    opacity: 0.9;
+    transform: translateX(100%) rotate(0deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(var(--rotate-angle));
+  }
+}
+
 .zIndex-0 {
+  --rotate-angle: -8deg;
+  opacity: 0;
   z-index: 0;
   position: relative;
-  transform: rotate(-8deg);
   translate: 10px;
+  animation: deal 0.6s 0.2s forwards;
 }
 
 .zIndex-1 {
+  --rotate-angle: -4deg;
+  opacity: 0;
   z-index: 1;
   position: relative;
-  transform: rotate(-4deg);
   translate: -80px -5px;
   margin-right: -80px;
+  animation: deal 0.6s 1s forwards;
 }
 
 .zIndex-2 {
+  --rotate-angle: -1deg;
+  opacity: 0;
+
   z-index: 2;
   position: relative;
-  transform: rotate(-1deg);
   translate: -90px -8px;
   margin-right: -90px;
+  animation: deal 0.6s forwards;
 }
 
 .zIndex-3 {
+  --rotate-angle: 2deg;
+  opacity: 0;
   z-index: 3;
   position: relative;
-  transform: rotate(2deg);
   translate: -100px -2px;
   margin-right: -100px;
+  animation: deal 0.6s forwards;
 }
 
 .zIndex-4 {
+  --rotate-angle: 5deg;
+  opacity: 0;
   z-index: 4;
   position: relative;
-  transform: rotate(5deg);
   translate: -100px 2px;
   margin-right: -100px;
+  animation: deal 0.6s forwards;
 }
 
 .zIndex-5 {
+  --rotate-angle: 8deg;
+  opacity: 0;
   z-index: 5;
   position: relative;
-  transform: rotate(8deg);
   translate: -100px 8px;
   margin-right: -100px;
+  animation: deal 0.6s 1.5s forwards;
 }
 
 @media (max-width: 600px) {
@@ -167,7 +216,7 @@ button:hover {
     font-size: 16px;
   }
   .gameOver {
-    top: -300px;
+    top: -375px;
     font-size: 70px;
   }
   .drawnCards {

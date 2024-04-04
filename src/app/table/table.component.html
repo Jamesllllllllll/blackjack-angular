@@ -20,10 +20,13 @@
 <div class="actions">
   @if (this.bust) {
   <p class="bust">Bust!</p>
-  } @if (!this.gameOver) {
+  } @if (!this.gameOver) { @defer (on timer(1.6s)) {
   <button (click)="hitMe()" type="button" class="hitMe">Hit</button>
   <button (click)="stand()" type="button" class="stand">Stand</button>
-  } @if (this.gameOver) {
+  } @placeholder {
+  <button (click)="hitMe()" type="button" class="hitMe" disabled>Hit</button>
+  <button (click)="stand()" type="button" class="stand" disabled>Stand</button>
+  } } @if (this.gameOver) {
   <button (click)="deal()" type="button" class="resetGame">Deal</button>
   }
 </div>
