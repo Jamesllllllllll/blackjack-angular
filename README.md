@@ -4,7 +4,9 @@ This is a simple Blackjack game I created to learn [Angular](https://angular.dev
 
 In its current state, you can hit to draw cards. The game will detect if you bust. When you stand, the dealer's cards will be revealed to see who wins! 
 
-TO DO: Dealer decides whether to hit when player stands.
+TO DO:
+- Properly implement Angular animations
+- Bankroll & betting
 
 ![blackjack-angular](https://github.com/Jamesllllllllll/blackjack-angular/assets/125431058/077096d0-377a-44e6-b918-818716ec6ee9)
 
